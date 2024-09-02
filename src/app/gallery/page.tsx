@@ -1,36 +1,36 @@
-"use client";
+import UploadButton from "./upload-button";
+import cloudinary from "cloudinary";
+import CloudinaryImage from "./cloudinary-image";
 
-import { Button } from "@/components/ui/button";
-import { Upload } from "lucide-react";
-import { CldUploadButton } from "next-cloudinary";
-import { useState } from "react";
-
-type UploadResult = {
-  info: {
-    public_id: string;
-  };
-  event: "success";
+type SearchResults = {
+  public_id: string;
 };
 
-export default function GalleryPage() {
-  const [imageId, setImageId] = useState("");
+export default async function GalleryPage() {
+  const result = (await cloudinary.v2.search
+    .expression("resource_type:image")
+    .sort_by("created_at", "desc")
+    .max_results(10)
+    .execute()) as { resources: SearchResults[] };
 
   return (
-    <section>
+    <section className="space-y-8">
       <div className="flex justify-between">
         <h1 className="text-4xl font-bold">Gallery</h1>
-        <Button asChild>
-          <div className="flex gap-2">
-            <Upload size={16} />
-            <CldUploadButton
-              uploadPreset="q5y3bfd6"
-              // @ts-ignore
-              onSuccess={(result: UploadResult) =>
-                setImageId(result?.info?.public_id)
-              }
-            />
-          </div>
-        </Button>
+        <UploadButton />
+      </div>
+      <div className="grid grid-cols-4 gap-4">
+        {result.resources.map((resource) => (
+          <CloudinaryImage
+            key={resource.public_id}
+            src={resource.public_id}
+            width="400"
+            height="300"
+            sizes="100vw"
+            alt="Description of my image"
+            className="rounded-md"
+          />
+        ))}
       </div>
     </section>
   );
