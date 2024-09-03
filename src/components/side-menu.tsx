@@ -27,7 +27,7 @@ export default function SideMenu() {
               variant="ghost"
               className="flex w-full justify-start gap-2"
             >
-              <Link href="/gallery">
+              <Link href="/albums">
                 <FolderClosed size={14} />
                 Albums
               </Link>
