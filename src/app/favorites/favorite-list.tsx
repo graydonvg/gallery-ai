@@ -47,7 +47,7 @@ export default function FavoriteList({ resources }: Props) {
 
         return (
           <li key={resource.public_id}>
-            <ImageOverlay>
+            <ImageOverlay displayName={resource.display_name}>
               <FavoriteButton
                 isFavorite={isFavorite}
                 onUnfavorite={() =>
