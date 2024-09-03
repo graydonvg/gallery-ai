@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import SideMenu from "@/components/side-menu";
 import Navbar from "@/components/navbar";
-import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +17,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark h-full">
-      <body className={cn("h-full", inter.className)}>
+    <html lang="en" className="dark">
+      <body className={inter.className}>
         <Navbar />
         <div className="flex">
           <SideMenu />
