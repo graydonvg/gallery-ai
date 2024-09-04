@@ -1,11 +1,9 @@
 "use client";
 
-import ImageOverlay from "@/components/ui/image-overlay";
 import { SearchResult } from "@/lib/types";
-import FavoriteButton from "../../components/favorite-button";
-import { CldImage } from "next-cloudinary";
 import { useOptimisticAction } from "next-safe-action/hooks";
 import { toggleFavoriteTagAction } from "../../actions/toggle-favorite-tag-action";
+import MasonryGrid from "@/components/masonry-grid";
 
 type Props = {
   resources: SearchResult[];
@@ -37,43 +35,21 @@ export default function GalleryList({ resources }: Props) {
     },
   );
 
-  return (
-    <ul className="grid grid-cols-4 gap-4">
-      {optimisticState.resources.map((resource) => {
-        const isFavorite = resource.tags.includes("favorite");
+  function handleFavorite(publicId: string) {
+    const isFavorite = false;
+    execute({ publicId, isFavorite, pathToRevalidate: "/gallery" });
+  }
 
-        return (
-          <li key={resource.public_id}>
-            <ImageOverlay displayName={resource.display_name}>
-              <FavoriteButton
-                isFavorite={isFavorite}
-                onUnfavorite={() =>
-                  execute({
-                    publicId: resource.public_id,
-                    isFavorite,
-                    pathToRevalidate: "/gallery",
-                  })
-                }
-                onFavorite={() =>
-                  execute({
-                    publicId: resource.public_id,
-                    isFavorite,
-                    pathToRevalidate: "/gallery",
-                  })
-                }
-              />
-              <CldImage
-                src={resource.public_id}
-                alt={resource.display_name}
-                width="400"
-                height="300"
-                sizes="100vw"
-                className="rounded-md"
-              />
-            </ImageOverlay>
-          </li>
-        );
-      })}
-    </ul>
+  function handleUnfavorite(publicId: string) {
+    const isFavorite = true;
+    execute({ publicId, isFavorite, pathToRevalidate: "/gallery" });
+  }
+
+  return (
+    <MasonryGrid
+      resources={optimisticState.resources}
+      onFavorite={handleFavorite}
+      onUnfavorite={handleUnfavorite}
+    />
   );
 }

@@ -1,13 +1,9 @@
 "use client";
 
-import ImageOverlay from "@/components/ui/image-overlay";
 import { SearchResult } from "@/lib/types";
-import { CldImage } from "next-cloudinary";
 import { useOptimisticAction } from "next-safe-action/hooks";
-import SolidHeart from "@/components/icons/solid-heart";
-import { Heart } from "lucide-react";
 import { toggleFavoriteTagAction } from "../../actions/toggle-favorite-tag-action";
-import FavoriteButton from "@/components/favorite-button";
+import MasonryGrid from "@/components/masonry-grid";
 
 type Props = {
   resources: SearchResult[];
@@ -40,36 +36,15 @@ export default function FavoriteList({ resources }: Props) {
     },
   );
 
-  return (
-    <ul className="grid grid-cols-4 gap-4">
-      {optimisticState.resources.map((resource) => {
-        const isFavorite = resource.tags.includes("favorite");
+  function handleUnfavorite(publicId: string) {
+    const isFavorite = true;
+    execute({ publicId, isFavorite, pathToRevalidate: "/favorites" });
+  }
 
-        return (
-          <li key={resource.public_id}>
-            <ImageOverlay displayName={resource.display_name}>
-              <FavoriteButton
-                isFavorite={isFavorite}
-                onUnfavorite={() =>
-                  execute({
-                    publicId: resource.public_id,
-                    isFavorite,
-                    pathToRevalidate: "/favorites",
-                  })
-                }
-              />
-              <CldImage
-                src={resource.public_id}
-                alt={resource.display_name}
-                width="400"
-                height="300"
-                sizes="100vw"
-                className="rounded-md"
-              />
-            </ImageOverlay>
-          </li>
-        );
-      })}
-    </ul>
+  return (
+    <MasonryGrid
+      resources={optimisticState.resources}
+      onUnfavorite={handleUnfavorite}
+    />
   );
 }
