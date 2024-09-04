@@ -13,7 +13,7 @@ export default function FavoriteButton({
   onUnfavorite,
 }: Props) {
   return (
-    <button className="absolute right-2 top-2 z-50 hidden items-center justify-center rounded-full bg-black/50 p-1 group-hover:flex">
+    <button className="absolute right-2 top-2 z-50 hidden items-center justify-center p-1 text-base group-hover:flex">
       {isFavorite ? (
         <SolidHeart
           className="right-2 top-2 z-50 text-red-500 hover:text-white"
