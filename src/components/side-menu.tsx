@@ -22,16 +22,7 @@ export default function SideMenu() {
                 Gallery
               </Link>
             </Button>
-            <Button
-              asChild
-              variant="ghost"
-              className="flex w-full justify-start gap-2 text-lg"
-            >
-              <Link href="/albums">
-                <FolderClosed size={20} />
-                Albums
-              </Link>
-            </Button>
+
             <Button
               asChild
               variant="ghost"
@@ -40,6 +31,16 @@ export default function SideMenu() {
               <Link href="/favorites">
                 <Heart size={20} />
                 Favorites
+              </Link>
+            </Button>
+            <Button
+              asChild
+              variant="ghost"
+              className="flex w-full justify-start gap-2 text-lg"
+            >
+              <Link href="/albums">
+                <FolderClosed size={20} />
+                Albums
               </Link>
             </Button>
           </div>

@@ -1,5 +1,11 @@
 import { Heart } from "lucide-react";
 import SolidHeart from "@/components/icons/solid-heart";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 type Props = {
   isFavorite: boolean;
@@ -13,18 +19,32 @@ export default function FavoriteButton({
   onUnfavorite,
 }: Props) {
   return (
-    <button className="absolute right-2 top-2 z-50 hidden items-center justify-center p-1 text-base group-hover:flex">
-      {isFavorite ? (
-        <SolidHeart
-          className="right-2 top-2 z-50 text-red-500 hover:text-white"
-          onClick={onUnfavorite}
-        />
-      ) : (
-        <Heart
-          className="size-6 text-white hover:text-red-500"
-          onClick={onFavorite}
-        />
-      )}
-    </button>
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <button
+            className="absolute left-2 top-2 z-50 hidden items-center justify-center p-1 text-base group-hover:flex"
+            aria-label={
+              isFavorite ? "Remove from favorites" : "Add to favorites"
+            }
+          >
+            {isFavorite ? (
+              <SolidHeart
+                className="size-6 text-red-500 hover:text-white"
+                onClick={onUnfavorite}
+              />
+            ) : (
+              <Heart
+                className="size-6 text-white hover:text-red-500"
+                onClick={onFavorite}
+              />
+            )}
+          </button>
+        </TooltipTrigger>
+        <TooltipContent>
+          <p>{isFavorite ? "Remove favorite" : "Add favorite"}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
   );
 }

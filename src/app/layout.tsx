@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import SideMenu from "@/components/side-menu";
-import Navbar from "@/components/navbar";
+import Appbar from "@/components/appbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <body className={inter.className}>
-        <Navbar />
+        <Appbar />
         <div className="flex">
           <SideMenu />
           <div className="w-full px-4 pt-8">{children}</div>
