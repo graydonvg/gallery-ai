@@ -1,14 +1,6 @@
 import cloudinary from "cloudinary";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import Link from "next/link";
 import { Asset, FolderAssets } from "@/lib/types";
-import ImagePreview from "./image-preview";
+import Album from "./album";
 
 type Folder = {
   folders: {
@@ -37,23 +29,16 @@ export default async function AlbumsPage() {
       <header>
         <h1 className="text-4xl font-bold">Albums</h1>
       </header>
-      <div className="grid grid-cols-2 gap-4">
-        {foldersResult.folders.map((folder, index) => (
-          <Link key={folder.name} href={`albums/${folder.name}`}>
-            <Card
+      <div className="h-[847px] overflow-y-auto">
+        <div className="grid gap-4 pb-8 pr-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+          {foldersResult.folders.map((folder, index) => (
+            <Album
               key={folder.name}
-              className="cursor-pointer hover:bg-accent hover:text-accent-foreground"
-            >
-              <CardHeader>
-                <CardTitle>{folder.name}</CardTitle>
-                <CardDescription>All your {folder.name} assets</CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ImagePreview folderAssets={folderAssetsResult[index]} />
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
+              foldersName={folder.name}
+              folderAssets={folderAssetsResult[index]}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );

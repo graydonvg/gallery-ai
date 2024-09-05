@@ -10,7 +10,7 @@ export default function SideMenu() {
   const pathname = usePathname();
 
   return (
-    <div className="basis-[280px] border-r border-border pb-12">
+    <div className="basis-[200px] border-r border-border pb-12">
       <div className="space-y-4 py-4">
         <div className="px-3 py-2">
           <h2 className="mb-2 px-4 text-xl font-semibold tracking-tight">

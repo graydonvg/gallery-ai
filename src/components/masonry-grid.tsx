@@ -26,7 +26,7 @@ export default function MasonryGrid({
 
   return (
     <div
-      className="grid gap-4"
+      className="grid gap-4 pb-8 pr-4"
       style={{
         gridTemplateColumns: `repeat(${MAX_COLUMNS}, minmax(0, 1fr))`,
       }}

@@ -58,7 +58,7 @@ export default function ResourceOverlay({ displayName, children }: Props) {
           )}
         </div>
       </TooltipProvider>
-      <div className="absolute inset-0 rounded-md bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-50"></div>
+      <div className="pointer-events-none absolute inset-0 rounded-md bg-black opacity-0 transition-opacity duration-300 group-hover:opacity-50"></div>
     </article>
   );
 }

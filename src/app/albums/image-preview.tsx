@@ -9,11 +9,11 @@ type Props = {
 
 export default function ImagePreview({ folderAssets }: Props) {
   return (
-    <div className="flex items-center gap-2">
-      {folderAssets.resources.map((resource, index) => (
+    <div className="flex flex-wrap items-center gap-2">
+      {folderAssets.resources.map((resource) => (
         <div
           key={resource.public_id}
-          className="relative size-16 overflow-hidden"
+          className="relative size-16 shrink-0 overflow-hidden"
         >
           <CldImage
             src={resource.public_id}
@@ -25,7 +25,7 @@ export default function ImagePreview({ folderAssets }: Props) {
         </div>
       ))}
       {folderAssets.total_count > 6 ? (
-        <span className="text-xl text-foreground">
+        <span className="flex size-16 items-center justify-center text-xl text-foreground">
           (+{folderAssets.total_count - 5})
         </span>
       ) : null}

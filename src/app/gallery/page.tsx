@@ -13,7 +13,7 @@ export default async function GalleryPage() {
 
   return (
     <section className="space-y-8">
-      <header className="flex justify-between">
+      <header className="flex justify-between pr-4">
         <h1 className="text-4xl font-bold">Gallery</h1>
         <UploadButton />
       </header>

@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import SideMenu from "@/components/side-menu";
 import Appbar from "@/components/appbar";
+import { cn } from "@/lib/utils";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,11 +19,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={inter.className}>
+      <body className={cn("flex min-h-screen flex-col", inter.className)}>
         <Appbar />
-        <div className="flex">
+        <div className="flex flex-1">
           <SideMenu />
-          <div className="w-full px-4 pt-8">{children}</div>
+          <main className="w-full flex-1 pl-4 pt-8">{children}</main>
         </div>
       </body>
     </html>
