@@ -1,12 +1,12 @@
 "use client";
 
-import { SearchResult } from "@/lib/types";
+import { Asset } from "@/lib/types";
 import { useOptimisticAction } from "next-safe-action/hooks";
 import { toggleFavoriteTagAction } from "../../actions/toggle-favorite-tag-action";
 import MasonryGrid from "@/components/masonry-grid";
 
 type Props = {
-  resources: SearchResult[];
+  resources: Asset[];
 };
 
 export default function FavoriteList({ resources }: Props) {

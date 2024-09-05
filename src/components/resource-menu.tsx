@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { AddToAblumDialog } from "./add-to-ablum-dialog";
-import { SearchResult } from "@/lib/types";
+import { Asset } from "@/lib/types";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -21,14 +21,14 @@ import {
 } from "@/components/ui/tooltip";
 
 type Props = {
-  resource: SearchResult;
+  resource: Asset;
 };
 
 export default function ResourceMenu({ resource }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <DropdownMenu onOpenChange={setIsOpen}>
+    <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
       <TooltipProvider>
         <Tooltip>
           <DropdownMenuTrigger
@@ -57,7 +57,10 @@ export default function ResourceMenu({ resource }: Props) {
       </TooltipProvider>
       <DropdownMenuContent className="z-50 min-w-40">
         <DropdownMenuItem asChild>
-          <AddToAblumDialog resource={resource} />
+          <AddToAblumDialog
+            resource={resource}
+            closeResourceMenu={() => setIsOpen(false)}
+          />
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

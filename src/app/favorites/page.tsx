@@ -1,5 +1,5 @@
 import cloudinary from "cloudinary";
-import { SearchResult } from "@/lib/types";
+import { Asset } from "@/lib/types";
 import FavoriteList from "./favorite-list";
 
 export default async function FavoritesPage() {
@@ -8,11 +8,11 @@ export default async function FavoritesPage() {
     .sort_by("created_at", "desc")
     .with_field("tags")
     .max_results(10)
-    .execute()) as { resources: SearchResult[] };
+    .execute()) as { resources: Asset[] };
 
   return (
     <section className="space-y-8">
-      <header className="flex justify-between">
+      <header>
         <h1 className="text-4xl font-bold">Favorites</h1>
       </header>
       <FavoriteList resources={result.resources} />

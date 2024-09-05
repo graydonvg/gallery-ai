@@ -1,11 +1,11 @@
-import { SearchResult } from "@/lib/types";
+import { Asset } from "@/lib/types";
 import ResourceOverlay from "./ui/resource-overlay";
 import FavoriteButton from "./favorite-button";
 import { CldImage } from "next-cloudinary";
 import ResourceMenu from "./resource-menu";
 
 type Props = {
-  resources: SearchResult[];
+  resources: Asset[];
   onFavorite?: (publicId: string) => void;
   onUnfavorite: (publicId: string) => void;
 };

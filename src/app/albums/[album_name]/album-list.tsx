@@ -2,14 +2,14 @@
 
 import { Asset } from "@/lib/types";
 import { useOptimisticAction } from "next-safe-action/hooks";
-import { toggleFavoriteTagAction } from "../../actions/toggle-favorite-tag-action";
 import MasonryGrid from "@/components/masonry-grid";
+import { toggleFavoriteTagAction } from "@/actions/toggle-favorite-tag-action";
 
 type Props = {
   resources: Asset[];
 };
 
-export default function GalleryList({ resources }: Props) {
+export default function AblumList({ resources }: Props) {
   const { execute, optimisticState } = useOptimisticAction(
     toggleFavoriteTagAction,
     {
@@ -21,16 +21,17 @@ export default function GalleryList({ resources }: Props) {
               ? resource.tags.filter((tag) => tag !== "favorite")
               : [...resource.tags, "favorite"];
 
-            return {
-              ...resource,
-              tags: updatedTags,
-            };
+            return { ...resource, tags: updatedTags };
           }
 
           return resource;
         });
 
-        return { resources: updatedResources };
+        const filteredResources = updatedResources.filter(
+          (resource) => resource.tags.includes("favorite") || !isFavorite,
+        );
+
+        return { resources: filteredResources };
       },
     },
   );

@@ -1,6 +1,6 @@
 import UploadButton from "./upload-button";
 import cloudinary from "cloudinary";
-import { SearchResult } from "@/lib/types";
+import { Asset } from "@/lib/types";
 import GalleryList from "./gallery-list";
 
 export default async function GalleryPage() {
@@ -9,7 +9,7 @@ export default async function GalleryPage() {
     .sort_by("created_at", "desc")
     .with_field("tags")
     .max_results(30)
-    .execute()) as { resources: SearchResult[] };
+    .execute()) as { resources: Asset[] };
 
   return (
     <section className="space-y-8">

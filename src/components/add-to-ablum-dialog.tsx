@@ -11,17 +11,24 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { SearchResult } from "@/lib/types";
-import { FolderPlus } from "lucide-react";
+import { Asset } from "@/lib/types";
+import { FolderInput, FolderPlus } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 
 type Props = {
-  resource: SearchResult;
+  resource: Asset;
+  closeResourceMenu: () => void;
 };
 
-export function AddToAblumDialog({ resource }: Props) {
+export function AddToAblumDialog({ resource, closeResourceMenu }: Props) {
+  const pathname = usePathname();
   const [albumName, setAlbumName] = useState("");
   const [open, setOpen] = useState(false);
+  const actionText = pathname.includes("album")
+    ? "Move to Album"
+    : "Add to Album";
+  const description = `Type an album you want ${pathname.includes("album") ? "move" : "add"} this ${resource.resource_type} to.`;
 
   async function addToAlbum() {
     const result = await addToAblumAction({
@@ -31,27 +38,39 @@ export function AddToAblumDialog({ resource }: Props) {
 
     if (result?.data?.success) {
       setOpen(false);
+      closeResourceMenu();
       setAlbumName("");
     }
   }
 
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
+    <Dialog
+      open={open}
+      onOpenChange={(newOpenState) => {
+        setOpen(newOpenState);
+
+        if (!newOpenState) {
+          closeResourceMenu();
+        }
+      }}
+    >
       <DialogTrigger asChild>
         <Button
           variant="ghost"
           className="h-fit w-full justify-start rounded-sm px-2 py-1.5"
         >
-          <FolderPlus className="mr-2 size-4" />
-          <span>Add to Album</span>
+          {pathname.includes("album") ? (
+            <FolderInput className="mr-2 size-4" />
+          ) : (
+            <FolderPlus className="mr-2 size-4" />
+          )}
+          <span>{actionText}</span>
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Add to Album</DialogTitle>
-          <DialogDescription>
-            Type an album you want move this {resource.resource_type} into.
-          </DialogDescription>
+          <DialogTitle>{actionText}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -68,7 +87,7 @@ export function AddToAblumDialog({ resource }: Props) {
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={addToAlbum}>Add to Album</Button>
+          <Button onClick={addToAlbum}>{actionText}</Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
