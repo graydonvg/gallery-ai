@@ -42,7 +42,7 @@ export default function FavoriteList({ resources }: Props) {
   }
 
   return (
-    <div className="h-[847px] overflow-y-auto">
+    <div className="h-[calc(100vh-168.8px)] overflow-y-auto">
       <MasonryGrid
         resources={optimisticState.resources}
         onUnfavorite={handleUnfavorite}

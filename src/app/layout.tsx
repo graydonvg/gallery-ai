@@ -23,7 +23,7 @@ export default function RootLayout({
         <Appbar />
         <div className="flex flex-1">
           <SideMenu />
-          <main className="w-full flex-1 pl-4 pt-8">{children}</main>
+          <main className="w-full pl-4 pt-8">{children}</main>
         </div>
       </body>
     </html>

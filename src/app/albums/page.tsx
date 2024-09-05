@@ -29,7 +29,7 @@ export default async function AlbumsPage() {
       <header>
         <h1 className="text-4xl font-bold">Albums</h1>
       </header>
-      <div className="h-[847px] overflow-y-auto">
+      <div className="h-[calc(100vh-168.8px)] overflow-y-auto">
         <div className="grid gap-4 pb-8 pr-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
           {foldersResult.folders.map((folder, index) => (
             <Album
