@@ -4,6 +4,7 @@ import "./globals.css";
 import SideMenu from "@/components/side-menu";
 import Appbar from "@/components/appbar";
 import { cn } from "@/lib/utils";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +19,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body className={cn("flex min-h-screen flex-col", inter.className)}>
-        <Appbar />
-        <div className="flex flex-1">
-          <SideMenu />
-          <main className="w-full pl-4 pt-8">{children}</main>
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+          enableColorScheme
+        >
+          <Appbar />
+          <div className="flex flex-1">
+            <SideMenu />
+            <main className="w-full pl-4 pt-8">{children}</main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
