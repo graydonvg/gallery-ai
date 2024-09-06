@@ -37,7 +37,7 @@ export default function SearchBar({ path, searchBy }: Props) {
         router.replace(`${path}?search=${encodeURIComponent(search)}`);
         router.refresh();
       }}
-      className="mx-auto w-1/2"
+      className="mx-auto max-w-xl"
     >
       <div className="relative">
         <Input

@@ -47,38 +47,36 @@ export default function SideMenuClient({ folders }: Props) {
                 Favorites
               </Link>
             </Button>
-            <div>
-              <Button
-                asChild
-                variant="ghost"
-                className={cn("flex w-full justify-start gap-2 text-lg", {
-                  "bg-accent text-accent-foreground": pathname === "/albums",
-                })}
-              >
-                <Link href="/albums">
-                  <FolderClosed size={20} />
-                  Albums
-                </Link>
-              </Button>
-              <div className="pl-8">
-                {folders.map((folder) => (
-                  <Button
-                    key={folder.name}
-                    asChild
-                    variant="ghost"
-                    size="sm"
-                    className={cn(
-                      "flex w-full justify-start text-left text-base",
-                      {
-                        "bg-accent text-accent-foreground":
-                          pathname.split("/")[2] === folder.name,
-                      },
-                    )}
-                  >
-                    <Link href={`/albums/${folder.name}`}>{folder.name}</Link>
-                  </Button>
-                ))}
-              </div>
+            <Button
+              asChild
+              variant="ghost"
+              className={cn("flex w-full justify-start gap-2 text-lg", {
+                "bg-accent text-accent-foreground": pathname === "/albums",
+              })}
+            >
+              <Link href="/albums">
+                <FolderClosed size={20} />
+                Albums
+              </Link>
+            </Button>
+            <div className="space-y-1 pl-8">
+              {folders.map((folder) => (
+                <Button
+                  key={folder.name}
+                  asChild
+                  variant="ghost"
+                  size="sm"
+                  className={cn(
+                    "flex w-full justify-start text-left text-base",
+                    {
+                      "bg-accent text-accent-foreground":
+                        pathname.split("/")[2] === folder.name,
+                    },
+                  )}
+                >
+                  <Link href={`/albums/${folder.name}`}>{folder.name}</Link>
+                </Button>
+              ))}
             </div>
           </div>
         </div>

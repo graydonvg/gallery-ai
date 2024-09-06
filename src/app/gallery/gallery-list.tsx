@@ -46,7 +46,7 @@ export default function GalleryList({ resources }: Props) {
   }
 
   return (
-    <div className="h-[calc(100vh-240.8px)] overflow-y-auto">
+    <div className="mx-auto h-[calc(100vh-240.8px)] overflow-y-auto">
       <MasonryGrid
         resources={optimisticState.resources}
         onFavorite={handleFavorite}

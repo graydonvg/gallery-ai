@@ -42,7 +42,7 @@ export default function ResourceOverlay({ displayName, children }: Props) {
   }
 
   return (
-    <article className="group relative h-fit select-none">
+    <article className="group relative mb-4 h-fit select-none break-inside-avoid">
       {children}
       <TooltipProvider>
         <div className="absolute bottom-3 left-3 z-40 max-w-[calc(100%-1.5rem)] overflow-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100">

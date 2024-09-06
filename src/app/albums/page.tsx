@@ -46,7 +46,7 @@ export default async function AlbumsPage({ searchParams }: Props) {
         <SearchBar path="/albums" searchBy="album name" />
       </div>
       <div className="h-[calc(100vh-240.8px)] overflow-y-auto">
-        <div className="grid gap-4 pb-8 pr-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
+        <div className="grid gap-4 pb-8 pr-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {targetFolders.map((folder, index) => (
             <Album
               key={folder.name}

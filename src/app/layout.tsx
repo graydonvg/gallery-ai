@@ -30,7 +30,7 @@ export default function RootLayout({
           enableColorScheme
         >
           <Appbar />
-          <div className="flex flex-1">
+          <div className="mx-auto flex w-full max-w-screen-2xl flex-1">
             <SideMenuServer />
             <main className="w-full pl-4 pt-8">{children}</main>
           </div>

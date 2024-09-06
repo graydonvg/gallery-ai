@@ -47,7 +47,7 @@ export default function AblumList({ resources }: Props) {
   }
 
   return (
-    <div className="h-[calc(100vh-168.8px)] overflow-y-auto">
+    <div className="h-[calc(100vh-240.8px)] overflow-y-auto">
       <MasonryGrid
         resources={optimisticState.resources}
         onFavorite={handleFavorite}
