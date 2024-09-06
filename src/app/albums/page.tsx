@@ -1,19 +1,32 @@
 import cloudinary from "cloudinary";
-import { Asset, FolderAssets } from "@/lib/types";
+import { Asset, Folder, FolderAssets } from "@/lib/types";
 import Album from "./album";
+import SearchBar from "@/components/search-bar";
 
-type Folder = {
-  folders: {
-    name: string;
-    path: string;
-    external_id: string;
-  }[];
+type Props = {
+  searchParams: {
+    search: string;
+  };
 };
 
-export default async function AlbumsPage() {
-  const foldersResult = (await cloudinary.v2.api.root_folders()) as Folder;
-  const folderAssetsResult = (await Promise.all(
-    foldersResult.folders.map(async (folder) => {
+export default async function AlbumsPage({ searchParams }: Props) {
+  // Fetch all root folders
+  const { folders } = (await cloudinary.v2.api.root_folders()) as {
+    folders: Folder[];
+  };
+
+  // Determine the target folders based on search params
+  const targetFolderNames = searchParams.search
+    ? [searchParams.search]
+    : folders.map((folder) => folder.name);
+
+  const targetFolders = folders.filter((folder) =>
+    targetFolderNames.includes(folder.name),
+  );
+
+  // Fetch assets for the target folders
+  const folderAssets = (await Promise.all(
+    targetFolders.map(async (folder) => {
       const result = await cloudinary.v2.search
         .expression(`resource_type:image AND asset_folder=${folder.name}`)
         .sort_by("created_at", "desc")
@@ -29,13 +42,16 @@ export default async function AlbumsPage() {
       <header>
         <h1 className="text-4xl font-bold">Albums</h1>
       </header>
-      <div className="h-[calc(100vh-168.8px)] overflow-y-auto">
+      <div className="pr-4">
+        <SearchBar path="/albums" searchBy="album name" />
+      </div>
+      <div className="h-[calc(100vh-240.8px)] overflow-y-auto">
         <div className="grid gap-4 pb-8 pr-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
-          {foldersResult.folders.map((folder, index) => (
+          {targetFolders.map((folder, index) => (
             <Album
               key={folder.name}
               foldersName={folder.name}
-              folderAssets={folderAssetsResult[index]}
+              folderAssets={folderAssets[index]}
             />
           ))}
         </div>

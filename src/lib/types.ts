@@ -10,3 +10,9 @@ export type FolderAssets = {
   total_count: number;
   resources: Asset[];
 };
+
+export type Folder = {
+  name: string;
+  path: string;
+  external_id: string;
+};

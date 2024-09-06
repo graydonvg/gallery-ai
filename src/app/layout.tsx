@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SideMenu from "@/components/side-menu";
+import SideMenuClient from "@/components/side-menu-client";
 import Appbar from "@/components/appbar";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
+import SideMenuServer from "@/components/side-menu-server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,7 +20,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={cn("flex min-h-screen flex-col", inter.className)}>
         <ThemeProvider
           attribute="class"
@@ -30,7 +31,7 @@ export default function RootLayout({
         >
           <Appbar />
           <div className="flex flex-1">
-            <SideMenu />
+            <SideMenuServer />
             <main className="w-full pl-4 pt-8">{children}</main>
           </div>
         </ThemeProvider>
