@@ -7,7 +7,7 @@ export default function Appbar() {
     <div className="border-b">
       <div className="mx-auto flex h-16 max-w-screen-2xl items-center px-4">
         <Images className="mr-2" />
-        <span className="text-2xl">GALLERY AI</span>
+        <span className="font-bold">GALLERY AI</span>
         <div className="ml-auto flex items-center gap-4">
           <ThemeToggle />
           <Avatar>

@@ -18,20 +18,18 @@ export default function SidebarClient({ folders }: Props) {
 
   return (
     <div className="shrink-0 basis-[220px] space-y-2 border-r border-border px-3 py-6">
-      <h2 className="px-4 text-xl font-semibold tracking-tight">
-        Media Library
-      </h2>
+      <h2 className="px-4 text-lg font-semibold tracking-tight">Library</h2>
       <div className="space-y-1">
         <SidebarButton
           href="/gallery"
           label="Gallery"
           /* eslint-disable-next-line jsx-a11y/alt-text */
-          icon={<Image aria-hidden size={20} />}
+          icon={<Image aria-hidden size={16} />}
         />
         <SidebarButton
           href="/favorites"
           label="Favorites"
-          icon={<Heart size={20} />}
+          icon={<Heart size={16} />}
         />
         <SidebarButton href="/albums" className="pr-0">
           <div className="w-full">
@@ -39,7 +37,7 @@ export default function SidebarClient({ folders }: Props) {
               href="/albums"
               className="flex w-full items-center justify-start gap-2"
             >
-              <Library size={20} />
+              <Library size={16} />
               Albums
             </Link>
             <Button
@@ -47,7 +45,7 @@ export default function SidebarClient({ folders }: Props) {
               onClick={() => setIsAlbumsExpanded((prev) => !prev)}
             >
               <ChevronRight
-                size={20}
+                size={16}
                 className={cn("transition-transform duration-300", {
                   "rotate-90": isAlbumsExpanded,
                 })}

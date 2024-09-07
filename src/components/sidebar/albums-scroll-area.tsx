@@ -31,19 +31,16 @@ export default function AlbumsScrollArea({ folders, isAlbumsExpanded }: Props) {
             asChild
             variant="ghost"
             size="sm"
-            className={cn(
-              "flex w-full justify-start gap-2 text-left text-base",
-              {
-                "bg-accent text-accent-foreground":
-                  pathname.split("/")[2] === folder.name,
-              },
-            )}
+            className={cn("flex w-full justify-start gap-2 text-left text-sm", {
+              "bg-accent text-accent-foreground":
+                pathname.split("/")[2] === folder.name,
+            })}
           >
             <Link href={`/albums/${folder.name}`}>
               {pathname.split("/")[2] === folder.name ? (
-                <FolderOpen size={20} />
+                <FolderOpen size={16} />
               ) : (
-                <FolderClosed size={20} />
+                <FolderClosed size={16} />
               )}
               {folder.name}
             </Link>

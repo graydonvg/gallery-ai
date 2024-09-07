@@ -25,13 +25,9 @@ export default function SidebarButton({
     <Button
       asChild
       variant="ghost"
-      className={cn(
-        "flex w-full items-center justify-start gap-2 text-lg",
-        className,
-        {
-          "bg-accent text-accent-foreground": pathname === href,
-        },
-      )}
+      className={cn("flex w-full items-center justify-start gap-2", className, {
+        "bg-accent text-accent-foreground": pathname === href,
+      })}
     >
       {!children && href && icon && label ? (
         <Link href={href}>
