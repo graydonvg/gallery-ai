@@ -17,10 +17,9 @@ export default function AlbumsScrollArea({ folders, isAlbumsExpanded }: Props) {
   return (
     <ScrollArea
       className={cn(
-        "overflow-hidden px-1 transition-all duration-300 ease-in-out",
+        "h-[300px] overflow-hidden px-1 transition-[height] duration-300 ease-in-out",
         {
           "h-0": !isAlbumsExpanded,
-          "h-[300px]": isAlbumsExpanded,
         },
       )}
     >

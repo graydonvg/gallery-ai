@@ -5,6 +5,13 @@ import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useRouter, useSearchParams } from "next/navigation";
 import { CircleX, Search } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "./ui/tooltip";
+import { cn } from "@/lib/utils";
 
 type Props = {
   path: string;
@@ -39,32 +46,58 @@ export default function SearchBar({ path, searchBy }: Props) {
       }}
       className="mx-auto max-w-xl"
     >
-      <div className="relative">
+      <div
+        className="relative cursor-text"
+        onClick={() => {
+          document.getElementById("search-input")?.focus();
+        }}
+      >
         <Input
+          id="search-input"
           placeholder={`Search by ${searchBy}...`}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
+          className="pr-20"
         />
         <div className="absolute right-0 top-0 overflow-hidden">
-          {search.length ? (
-            <Button
-              type="button"
-              size="icon"
-              variant="ghost"
-              className="rotate-in"
-              onClick={(e) => clearSearch(e)}
-            >
-              <CircleX />
-            </Button>
-          ) : null}
-          <Button
-            type="submit"
-            size="icon"
-            variant="ghost"
-            disabled={!search.length}
-          >
-            <Search />
-          </Button>
+          <TooltipProvider>
+            <Tooltip disableHoverableContent>
+              <TooltipTrigger asChild>
+                <Button
+                  type="button"
+                  size="icon"
+                  onClick={(e) => clearSearch(e)}
+                  className={cn(
+                    "bg-transparent text-accent-foreground transition-transform duration-300 hover:bg-transparent",
+                    {
+                      "translate-y-10 rotate-90": !search.length,
+                    },
+                  )}
+                >
+                  <CircleX />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Reset search</p>
+              </TooltipContent>
+            </Tooltip>
+            <Tooltip disableHoverableContent>
+              <TooltipTrigger asChild>
+                <Button
+                  type="submit"
+                  size="icon"
+                  variant="ghost"
+                  disabled={!search.length}
+                  className="bg-transparent text-accent-foreground hover:bg-transparent"
+                >
+                  <Search />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <span>Search</span>
+              </TooltipContent>
+            </Tooltip>
+          </TooltipProvider>
         </div>
       </div>
     </form>

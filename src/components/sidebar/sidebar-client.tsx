@@ -32,7 +32,7 @@ export default function SidebarClient({ folders }: Props) {
           icon={<Heart size={16} />}
         />
         <SidebarButton href="/albums" className="pr-0">
-          <div className="w-full">
+          <div className="flex w-full gap-0">
             <Link
               href="/albums"
               className="flex w-full items-center justify-start gap-2"
