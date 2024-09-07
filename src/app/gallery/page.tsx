@@ -22,13 +22,11 @@ export default async function GalleryPage({ searchParams }: Props) {
 
   return (
     <section className="space-y-8">
-      <header className="flex justify-between pr-4">
+      <header className="flex justify-between">
         <h1 className="text-4xl font-bold">Gallery</h1>
         <UploadButton />
       </header>
-      <div className="pr-4">
-        <SearchBar path="/gallery" searchBy="tag" />
-      </div>
+      <SearchBar path="/gallery" searchBy="tag" />
       <GalleryList resources={result.resources} />
     </section>
   );

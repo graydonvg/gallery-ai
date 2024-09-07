@@ -1,11 +1,10 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import SideMenuClient from "@/components/side-menu-client";
 import Appbar from "@/components/appbar";
 import { cn } from "@/lib/utils";
-import { ThemeProvider } from "@/components/theme-provider";
-import SideMenuServer from "@/components/side-menu-server";
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import SidebarServer from "@/components/sidebar/sidebar-server";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -31,8 +30,8 @@ export default function RootLayout({
         >
           <Appbar />
           <div className="mx-auto flex w-full max-w-screen-2xl flex-1">
-            <SideMenuServer />
-            <main className="w-full pl-4 pt-8">{children}</main>
+            <SidebarServer />
+            <main className="w-full px-4 pt-8">{children}</main>
           </div>
         </ThemeProvider>
       </body>

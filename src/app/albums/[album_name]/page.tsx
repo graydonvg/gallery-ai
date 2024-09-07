@@ -27,9 +27,7 @@ export default async function AlbumPage({ params, searchParams }: Props) {
       <header className="flex flex-col gap-4">
         <h1 className="text-4xl font-bold">Album: {params.album_name}</h1>
       </header>
-      <div className="pr-4">
-        <SearchBar path={`/albums/${params.album_name}`} searchBy="tag" />
-      </div>
+      <SearchBar path={`/albums/${params.album_name}`} searchBy="tag" />
       <AblumList resources={result.resources} />
     </section>
   );

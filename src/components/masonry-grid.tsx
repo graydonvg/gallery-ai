@@ -1,5 +1,5 @@
 import { Asset } from "@/lib/types";
-import ResourceOverlay from "./ui/resource-overlay";
+import ResourceOverlay from "./resource-overlay";
 import FavoriteButton from "./favorite-button";
 import { CldImage } from "next-cloudinary";
 import ResourceMenu from "./resource-menu";
@@ -16,7 +16,7 @@ export default function MasonryGrid({
   onUnfavorite,
 }: Props) {
   return (
-    <div className="columns-1 gap-4 pb-8 pr-4 sm:columns-2 lg:columns-3 xl:columns-5">
+    <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-5">
       {resources.map((resource) => {
         const isFavorite = resource.tags.includes("favorite");
 

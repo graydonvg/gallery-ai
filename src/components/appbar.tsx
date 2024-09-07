@@ -1,5 +1,5 @@
 import { Images } from "lucide-react";
-import { ThemeToggle } from "./theme-toggle";
+import { ThemeToggle } from "./theme/theme-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 export default function Appbar() {

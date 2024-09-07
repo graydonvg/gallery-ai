@@ -2,6 +2,8 @@ import cloudinary from "cloudinary";
 import { Asset, Folder, FolderAssets } from "@/lib/types";
 import Album from "./album";
 import SearchBar from "@/components/search-bar";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import CreateAlbumButton from "./create-album-button";
 
 type Props = {
   searchParams: {
@@ -39,14 +41,13 @@ export default async function AlbumsPage({ searchParams }: Props) {
 
   return (
     <section className="space-y-8">
-      <header>
+      <header className="flex justify-between">
         <h1 className="text-4xl font-bold">Albums</h1>
+        {/* <CreateAlbumButton /> */}
       </header>
-      <div className="pr-4">
-        <SearchBar path="/albums" searchBy="album name" />
-      </div>
-      <div className="h-[calc(100vh-240.8px)] overflow-y-auto">
-        <div className="grid gap-4 pb-8 pr-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <SearchBar path="/albums" searchBy="album name" />
+      <ScrollArea className="mx-auto h-[calc(100vh-256.8px)] rounded-md border p-4">
+        <div className="grid gap-4 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {targetFolders.map((folder, index) => (
             <Album
               key={folder.name}
@@ -55,7 +56,7 @@ export default async function AlbumsPage({ searchParams }: Props) {
             />
           ))}
         </div>
-      </div>
+      </ScrollArea>
     </section>
   );
 }

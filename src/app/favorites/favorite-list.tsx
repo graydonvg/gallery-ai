@@ -4,6 +4,7 @@ import { Asset } from "@/lib/types";
 import { useOptimisticAction } from "next-safe-action/hooks";
 import { toggleFavoriteTagAction } from "../../actions/toggle-favorite-tag-action";
 import MasonryGrid from "@/components/masonry-grid";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Props = {
   resources: Asset[];
@@ -42,11 +43,11 @@ export default function FavoriteList({ resources }: Props) {
   }
 
   return (
-    <div className="h-[calc(100vh-240.8px)] overflow-y-auto">
+    <ScrollArea className="mx-auto h-[calc(100vh-256.8px)] rounded-md border p-4">
       <MasonryGrid
         resources={optimisticState.resources}
         onUnfavorite={handleUnfavorite}
       />
-    </div>
+    </ScrollArea>
   );
 }

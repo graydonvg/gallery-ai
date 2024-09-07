@@ -24,9 +24,7 @@ export default async function FavoritesPage({ searchParams }: Props) {
       <header>
         <h1 className="text-4xl font-bold">Favorites</h1>
       </header>
-      <div className="pr-4">
-        <SearchBar path="/favorites" searchBy="tag" />
-      </div>
+      <SearchBar path="/favorites" searchBy="tag" />
       <FavoriteList resources={result.resources} />
     </section>
   );
