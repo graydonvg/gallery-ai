@@ -6,33 +6,24 @@ import cloudinary from "cloudinary";
 import { revalidatePath } from "next/cache";
 
 const schema = z.object({
-  publicId: z.string(),
   albumName: z.string(),
 });
 
-export const addToAblumAction = actionClient
+export const addAblumAction = actionClient
   .schema(schema)
-  .action(async ({ parsedInput: { publicId, albumName } }) => {
+  .action(async ({ parsedInput: { albumName } }) => {
     try {
       const createdFolder = (await cloudinary.v2.api.create_folder(
         albumName,
       )) as {
         success: boolean;
-        name: string;
       };
 
       if (createdFolder.success) {
-        const result = await cloudinary.v2.api.update(publicId, {
-          asset_folder: createdFolder.name,
-        });
-
-        if (result) {
-          return { success: true };
-        }
-
-        revalidatePath("albums");
-
-        return { error: "An error occurred" };
+        revalidatePath("/albums");
+        return {
+          success: `Album added successfully`,
+        };
       }
 
       return { error: "An error occurred" };

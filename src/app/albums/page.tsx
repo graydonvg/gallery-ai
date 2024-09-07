@@ -3,7 +3,7 @@ import { Asset, Folder, FolderAssets } from "@/lib/types";
 import Album from "./album";
 import SearchBar from "@/components/search-bar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import CreateAlbumButton from "./create-album-button";
+import { AddAlbumDialog } from "@/components/add-ablum-dialog";
 
 type Props = {
   searchParams: {
@@ -43,7 +43,7 @@ export default async function AlbumsPage({ searchParams }: Props) {
     <section className="space-y-8">
       <header className="flex justify-between">
         <h1 className="text-4xl font-bold">Albums</h1>
-        {/* <CreateAlbumButton /> */}
+        <AddAlbumDialog />
       </header>
       <SearchBar path="/albums" searchBy="album name" />
       <ScrollArea className="mx-auto h-[calc(100vh-256.8px)] rounded-md border p-4">

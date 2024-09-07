@@ -14,7 +14,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { AddToAblumDialog } from "./add-to-ablum-dialog";
+import { MoveToAblumDialog } from "./move-to-ablum-dialog";
 import { Asset } from "@/lib/types";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
@@ -62,12 +62,10 @@ export default function ResourceMenu({ resource }: Props) {
         </Tooltip>
       </TooltipProvider>
       <DropdownMenuContent className="z-50 min-w-40">
-        <DropdownMenuItem asChild>
-          <AddToAblumDialog
-            resource={resource}
-            closeResourceMenu={() => setIsOpen(false)}
-          />
-        </DropdownMenuItem>
+        <MoveToAblumDialog
+          resource={resource}
+          closeResourceMenu={() => setIsOpen(false)}
+        />
         <DropdownMenuItem asChild>
           <Button
             variant="ghost"

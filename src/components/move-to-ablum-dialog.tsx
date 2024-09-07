@@ -1,4 +1,4 @@
-import { addToAblumAction } from "@/actions/add-to-album-action";
+import { moveToAblumAction } from "@/actions/move-to-album-action";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,26 +12,21 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Asset } from "@/lib/types";
-import { FolderInput, FolderPlus } from "lucide-react";
-import { usePathname } from "next/navigation";
+import { FolderInput } from "lucide-react";
 import { useState } from "react";
+import { DropdownMenuItem } from "./ui/dropdown-menu";
 
 type Props = {
   resource: Asset;
   closeResourceMenu: () => void;
 };
 
-export function AddToAblumDialog({ resource, closeResourceMenu }: Props) {
-  const pathname = usePathname();
+export function MoveToAblumDialog({ resource, closeResourceMenu }: Props) {
   const [albumName, setAlbumName] = useState("");
   const [open, setOpen] = useState(false);
-  const actionText = pathname.includes("album")
-    ? "Move to Album"
-    : "Add to Album";
-  const description = `Type an album you want ${pathname.includes("album") ? "move" : "add"} this ${resource.resource_type} to.`;
 
-  async function addToAlbum() {
-    const result = await addToAblumAction({
+  async function moveToAlbum() {
+    const result = await moveToAblumAction({
       publicId: resource.public_id,
       albumName,
     });
@@ -58,19 +53,18 @@ export function AddToAblumDialog({ resource, closeResourceMenu }: Props) {
         <Button
           variant="ghost"
           className="h-fit w-full justify-start rounded-sm px-2 py-1.5"
+          role="menuitem"
         >
-          {pathname.includes("album") ? (
-            <FolderInput className="mr-2 size-4" />
-          ) : (
-            <FolderPlus className="mr-2 size-4" />
-          )}
-          <span>{actionText}</span>
+          <FolderInput className="mr-2 size-4" />
+          Move to Album
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>{actionText}</DialogTitle>
-          <DialogDescription>{description}</DialogDescription>
+          <DialogTitle>Move to Album</DialogTitle>
+          <DialogDescription>
+            Type an album you want move this {resource.resource_type} to.
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid grid-cols-4 items-center gap-4">
@@ -87,7 +81,10 @@ export function AddToAblumDialog({ resource, closeResourceMenu }: Props) {
           </div>
         </div>
         <DialogFooter>
-          <Button onClick={addToAlbum}>{actionText}</Button>
+          <Button onClick={moveToAlbum} className="flex items-center gap-2">
+            <FolderInput size={16} />
+            Move
+          </Button>
         </DialogFooter>
       </DialogContent>
     </Dialog>
