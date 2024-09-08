@@ -2,9 +2,9 @@ import cloudinary from "cloudinary";
 import { Resource, Folder, FolderResources } from "@/lib/types";
 import SearchBar from "@/components/search-bar";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { AddAlbumDialog } from "@/components/add-ablum-dialog";
 import AlbumsList from "./albums-list";
 import { Suspense } from "react";
+import { AddAlbumDialog } from "./add-ablum-dialog";
 
 export default async function AlbumsPage() {
   const { folders } = (await cloudinary.v2.api.root_folders()) as {

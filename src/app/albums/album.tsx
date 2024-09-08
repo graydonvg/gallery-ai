@@ -8,27 +8,31 @@ import {
 import { FolderResources } from "@/lib/types";
 import Link from "next/link";
 import ImagePreview from "./image-preview";
+import AlbumMenu from "./album-menu";
 
 type Props = {
-  foldersName: string;
+  folderName: string;
   folderResources?: FolderResources;
 };
 
-export default function Album({ foldersName, folderResources }: Props) {
+export default function Album({ folderName, folderResources }: Props) {
   return (
-    <Link href={`albums/${foldersName}`}>
-      <Card
-        key={foldersName}
-        className="h-full cursor-pointer hover:bg-accent hover:text-accent-foreground"
-      >
-        <CardHeader>
-          <CardTitle>{foldersName}</CardTitle>
-          <CardDescription>All your {foldersName} assets</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <ImagePreview folderResources={folderResources} />
-        </CardContent>
-      </Card>
-    </Link>
+    <div className="group relative">
+      <AlbumMenu folderName={folderName} />
+      <Link href={`albums/${folderName}`}>
+        <Card
+          key={folderName}
+          className="h-full cursor-pointer group-hover:bg-accent group-hover:text-accent-foreground"
+        >
+          <CardHeader>
+            <CardTitle>{folderName}</CardTitle>
+            <CardDescription>All your {folderName} assets</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <ImagePreview folderResources={folderResources} />
+          </CardContent>
+        </Card>
+      </Link>
+    </div>
   );
 }

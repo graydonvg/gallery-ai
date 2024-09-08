@@ -14,7 +14,6 @@ import { Label } from "@/components/ui/label";
 import { Resource } from "@/lib/types";
 import { FolderInput } from "lucide-react";
 import { useState } from "react";
-import { DropdownMenuItem } from "./ui/dropdown-menu";
 
 type Props = {
   resource: Resource;
@@ -22,19 +21,19 @@ type Props = {
 };
 
 export function MoveToAblumDialog({ resource, closeResourceMenu }: Props) {
-  const [albumName, setAlbumName] = useState("");
+  const [folderName, setfolderName] = useState("");
   const [open, setOpen] = useState(false);
 
   async function moveToAlbum() {
     const result = await moveToAblumAction({
       publicId: resource.public_id,
-      albumName,
+      folderName,
     });
 
     if (result?.data?.success) {
       setOpen(false);
       closeResourceMenu();
-      setAlbumName("");
+      setfolderName("");
     }
   }
 
@@ -75,8 +74,8 @@ export function MoveToAblumDialog({ resource, closeResourceMenu }: Props) {
               id="album-name"
               className="col-span-3"
               placeholder="Album name..."
-              value={albumName}
-              onChange={(e) => setAlbumName(e.target.value)}
+              value={folderName}
+              onChange={(e) => setfolderName(e.target.value)}
             />
           </div>
         </div>

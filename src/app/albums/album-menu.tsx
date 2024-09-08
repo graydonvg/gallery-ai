@@ -1,4 +1,4 @@
-import { EllipsisVertical, Pencil } from "lucide-react";
+import { EllipsisVertical } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -7,43 +7,33 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { MoveToAblumDialog } from "./move-to-ablum-dialog";
-import { Resource } from "@/lib/types";
 import { useState } from "react";
-import { cn } from "@/lib/utils";
-import Link from "next/link";
+import { RenameAlbumDialog } from "./rename-album-dialog";
 
 type Props = {
-  resource: Resource;
+  folderName: string;
 };
 
-export default function ResourceMenu({ resource }: Props) {
+export default function AlbumMenu({ folderName }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
-      <DropdownMenuTrigger
-        asChild
-        aria-label={`${resource.resource_type} menu`}
-      >
+      <DropdownMenuTrigger asChild aria-label="Album menu">
         <Button
-          className={cn(
-            "absolute right-2 top-2 z-50 size-8 rounded-full bg-accent/70 p-0 text-accent-foreground hover:bg-accent/80",
-            {
-              "hidden group-hover:inline-flex": !isOpen,
-            },
-          )}
+          variant="ghost"
+          className="group-hover:bg-accentgroup-hover:text-accent-foreground absolute right-2 top-2 z-50 size-8 rounded-full p-0 hover:bg-background/20"
         >
           <EllipsisVertical className="size-6" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="z-50 min-w-40">
-        <MoveToAblumDialog
-          resource={resource}
-          closeResourceMenu={() => setIsOpen(false)}
+        <RenameAlbumDialog
+          folderName={folderName}
+          onDialogClose={() => setIsOpen(false)}
         />
         <DropdownMenuItem asChild>
-          <Button
+          {/* <Button
             variant="ghost"
             className="h-fit w-full cursor-pointer justify-start rounded-sm px-2 py-1.5 focus-visible:ring-0 focus-visible:ring-offset-0"
             asChild
@@ -52,7 +42,7 @@ export default function ResourceMenu({ resource }: Props) {
               <Pencil className="mr-2 size-4" />
               Edit
             </Link>
-          </Button>
+          </Button> */}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

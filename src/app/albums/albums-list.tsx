@@ -1,5 +1,6 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import Album from "./album";
 import { Folder, FolderResources } from "@/lib/types";
 
@@ -9,9 +10,8 @@ type Props = {
 };
 
 export default function AlbumsList({ folders, folderResources }: Props) {
-  // const searchParams = useSearchParams();
-  // const search = searchParams.get("search");
-  const search = null;
+  const searchParams = useSearchParams();
+  const search = searchParams.get("search");
 
   const filteredFolders = folders
     .filter((folder) => !search || folder.name === search)
@@ -28,7 +28,7 @@ export default function AlbumsList({ folders, folderResources }: Props) {
       {filteredFolders.map((folder) => (
         <Album
           key={folder.name}
-          foldersName={folder.name}
+          folderName={folder.name}
           folderResources={folder.folderResourcesData}
         />
       ))}
