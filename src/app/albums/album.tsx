@@ -5,16 +5,16 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { FolderAssets } from "@/lib/types";
+import { FolderResources } from "@/lib/types";
 import Link from "next/link";
 import ImagePreview from "./image-preview";
 
 type Props = {
   foldersName: string;
-  folderAssets: FolderAssets;
+  folderResources?: FolderResources;
 };
 
-export default function Album({ foldersName, folderAssets }: Props) {
+export default function Album({ foldersName, folderResources }: Props) {
   return (
     <Link href={`albums/${foldersName}`}>
       <Card
@@ -26,7 +26,7 @@ export default function Album({ foldersName, folderAssets }: Props) {
           <CardDescription>All your {foldersName} assets</CardDescription>
         </CardHeader>
         <CardContent>
-          <ImagePreview folderAssets={folderAssets} />
+          <ImagePreview folderResources={folderResources} />
         </CardContent>
       </Card>
     </Link>

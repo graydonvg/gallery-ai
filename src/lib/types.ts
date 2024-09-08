@@ -1,4 +1,4 @@
-export type Asset = {
+export type Resource = {
   public_id: string;
   display_name: string;
   resource_type: string;
@@ -6,9 +6,9 @@ export type Asset = {
   tags: string[];
 };
 
-export type FolderAssets = {
+export type FolderResources = {
   total_count: number;
-  resources: Asset[];
+  resources: Resource[];
 };
 
 export type Folder = {

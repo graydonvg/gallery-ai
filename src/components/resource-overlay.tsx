@@ -5,13 +5,25 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
+import ResourceMenu from "./resource-menu";
+import FavoriteButton from "./favorite-button";
+import { Resource } from "@/lib/types";
 
 type Props = {
-  displayName: string;
+  resource: Resource;
+  isFavorite: boolean;
+  onFavorite?: (publicId: string) => void;
+  onUnfavorite: (publicId: string) => void;
   children: ReactNode;
 };
 
-export default function ResourceOverlay({ displayName, children }: Props) {
+export default function ResourceOverlay({
+  resource,
+  isFavorite,
+  onFavorite,
+  onUnfavorite,
+  children,
+}: Props) {
   const textRef = useRef<HTMLSpanElement>(null);
   const [isOverflowing, setIsOverflowing] = useState(false);
 
@@ -36,13 +48,19 @@ export default function ResourceOverlay({ displayName, children }: Props) {
         ref={textRef}
         className="block overflow-hidden text-ellipsis whitespace-nowrap"
       >
-        {displayName}
+        {resource.display_name}
       </span>
     );
   }
 
   return (
     <article className="group relative mb-4 h-fit select-none break-inside-avoid">
+      <ResourceMenu resource={resource} />
+      <FavoriteButton
+        isFavorite={isFavorite}
+        onFavorite={() => onFavorite?.(resource.public_id)}
+        onUnfavorite={() => onUnfavorite(resource.public_id)}
+      />
       {children}
       <TooltipProvider>
         <div className="absolute bottom-3 left-3 z-40 max-w-[calc(100%-1.5rem)] overflow-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100">
@@ -50,7 +68,7 @@ export default function ResourceOverlay({ displayName, children }: Props) {
             <Tooltip>
               <TooltipTrigger asChild>{renderDisplayName()}</TooltipTrigger>
               <TooltipContent>
-                <span>{displayName}</span>
+                <span>{resource.display_name}</span>
               </TooltipContent>
             </Tooltip>
           ) : (

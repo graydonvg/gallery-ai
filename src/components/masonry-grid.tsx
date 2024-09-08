@@ -1,11 +1,9 @@
-import { Asset } from "@/lib/types";
+import { Resource } from "@/lib/types";
 import ResourceOverlay from "./resource-overlay";
-import FavoriteButton from "./favorite-button";
 import { CldImage } from "next-cloudinary";
-import ResourceMenu from "./resource-menu";
 
 type Props = {
-  resources: Asset[];
+  resources: Resource[];
   onFavorite?: (publicId: string) => void;
   onUnfavorite: (publicId: string) => void;
 };
@@ -23,14 +21,11 @@ export default function MasonryGrid({
         return (
           <ResourceOverlay
             key={resource.public_id}
-            displayName={resource.display_name}
+            resource={resource}
+            onFavorite={onFavorite}
+            onUnfavorite={onUnfavorite}
+            isFavorite={isFavorite}
           >
-            <ResourceMenu resource={resource} />
-            <FavoriteButton
-              isFavorite={isFavorite}
-              onFavorite={() => onFavorite?.(resource.public_id)}
-              onUnfavorite={() => onUnfavorite(resource.public_id)}
-            />
             <CldImage
               src={resource.public_id}
               alt={resource.display_name}

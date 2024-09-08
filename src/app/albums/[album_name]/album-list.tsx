@@ -1,13 +1,13 @@
 "use client";
 
-import { Asset } from "@/lib/types";
+import { Resource } from "@/lib/types";
 import { useOptimisticAction } from "next-safe-action/hooks";
 import MasonryGrid from "@/components/masonry-grid";
 import { toggleFavoriteTagAction } from "@/actions/toggle-favorite-tag-action";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 type Props = {
-  resources: Asset[];
+  resources: Resource[];
 };
 
 export default function AblumList({ resources }: Props) {

@@ -1,5 +1,5 @@
 import cloudinary from "cloudinary";
-import { Asset } from "@/lib/types";
+import { Resource } from "@/lib/types";
 import FavoriteList from "./favorite-list";
 import SearchBar from "@/components/search-bar";
 
@@ -17,7 +17,7 @@ export default async function FavoritesPage({ searchParams }: Props) {
     .sort_by("created_at", "desc")
     .with_field("tags")
     .max_results(10)
-    .execute()) as { resources: Asset[] };
+    .execute()) as { resources: Resource[] };
 
   return (
     <section className="space-y-8">

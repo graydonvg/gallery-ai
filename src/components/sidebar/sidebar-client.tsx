@@ -41,7 +41,7 @@ export default function SidebarClient({ folders }: Props) {
               Albums
             </Link>
             <Button
-              className="h-10 bg-transparent px-4 py-2 text-accent-foreground hover:bg-transparent"
+              className="h-10 bg-transparent px-4 py-2 text-accent-foreground hover:bg-background/20"
               onClick={() => setIsAlbumsExpanded((prev) => !prev)}
             >
               <ChevronRight

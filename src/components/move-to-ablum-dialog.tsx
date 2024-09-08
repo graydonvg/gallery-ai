@@ -11,13 +11,13 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Asset } from "@/lib/types";
+import { Resource } from "@/lib/types";
 import { FolderInput } from "lucide-react";
 import { useState } from "react";
 import { DropdownMenuItem } from "./ui/dropdown-menu";
 
 type Props = {
-  resource: Asset;
+  resource: Resource;
   closeResourceMenu: () => void;
 };
 

@@ -15,7 +15,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { MoveToAblumDialog } from "./move-to-ablum-dialog";
-import { Asset } from "@/lib/types";
+import { Resource } from "@/lib/types";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import {
@@ -27,7 +27,7 @@ import {
 import Link from "next/link";
 
 type Props = {
-  resource: Asset;
+  resource: Resource;
 };
 
 export default function ResourceMenu({ resource }: Props) {
