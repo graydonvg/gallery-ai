@@ -12,16 +12,12 @@ import { Resource } from "@/lib/types";
 type Props = {
   resource: Resource;
   isFavorite: boolean;
-  onFavorite?: (publicId: string) => void;
-  onUnfavorite: (publicId: string) => void;
   children: ReactNode;
 };
 
 export default function ResourceOverlay({
   resource,
   isFavorite,
-  onFavorite,
-  onUnfavorite,
   children,
 }: Props) {
   const textRef = useRef<HTMLSpanElement>(null);
@@ -56,11 +52,7 @@ export default function ResourceOverlay({
   return (
     <article className="group relative mb-4 h-fit select-none break-inside-avoid">
       <ResourceMenu resource={resource} />
-      <FavoriteButton
-        isFavorite={isFavorite}
-        onFavorite={() => onFavorite?.(resource.public_id)}
-        onUnfavorite={() => onUnfavorite(resource.public_id)}
-      />
+      <FavoriteButton isFavorite={isFavorite} publicId={resource.public_id} />
       {children}
       <TooltipProvider>
         <div className="absolute bottom-3 left-3 z-40 max-w-[calc(100%-1.5rem)] overflow-hidden opacity-0 transition-opacity duration-300 group-hover:opacity-100">

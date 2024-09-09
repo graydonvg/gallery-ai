@@ -1,18 +1,14 @@
+"use client";
+
 import { Resource } from "@/lib/types";
 import ResourceOverlay from "./resource-overlay";
 import { CldImage } from "next-cloudinary";
 
 type Props = {
   resources: Resource[];
-  onFavorite?: (publicId: string) => void;
-  onUnfavorite: (publicId: string) => void;
 };
 
-export default function MasonryGrid({
-  resources,
-  onFavorite,
-  onUnfavorite,
-}: Props) {
+export default function MasonryGrid({ resources }: Props) {
   return (
     <div className="columns-1 gap-4 sm:columns-2 lg:columns-3 xl:columns-5">
       {resources.map((resource) => {
@@ -22,8 +18,6 @@ export default function MasonryGrid({
           <ResourceOverlay
             key={resource.public_id}
             resource={resource}
-            onFavorite={onFavorite}
-            onUnfavorite={onUnfavorite}
             isFavorite={isFavorite}
           >
             <CldImage

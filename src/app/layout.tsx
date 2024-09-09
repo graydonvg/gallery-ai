@@ -5,6 +5,7 @@ import Appbar from "@/components/appbar";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme/theme-provider";
 import SidebarServer from "@/components/sidebar/sidebar-server";
+import { Providers } from "./providers";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,19 +22,13 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={cn("flex min-h-screen flex-col", inter.className)}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-          enableColorScheme
-        >
+        <Providers>
           <Appbar />
           <div className="mx-auto flex w-full max-w-screen-2xl flex-1">
             <SidebarServer />
             <main className="w-full px-4 pt-8">{children}</main>
           </div>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

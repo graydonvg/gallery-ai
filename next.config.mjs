@@ -1,4 +1,7 @@
 /** @type {import('next').NextConfig} */
+
+import { withAxiom } from "next-axiom";
+
 const nextConfig = {
   async redirects() {
     return [
@@ -11,4 +14,4 @@ const nextConfig = {
   },
 };
 
-export default nextConfig;
+export default withAxiom(nextConfig);
