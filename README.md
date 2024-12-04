@@ -1,7 +1,7 @@
 # Gallery AI
 
 ## Description
-A media gallery with AI powered editing features.
+AI powered image and video gallery and editing platform.
 
 ## Status 
 Work in progress.
